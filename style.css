@@ -1,6 +1,9 @@
 #uwah {
      pointer-events: auto;
      touch-action: none;
+     display: block;
+     max-width: 100%;
+     height: auto;
 }
 
 body {
