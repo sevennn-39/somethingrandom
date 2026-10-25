@@ -1,15 +1,11 @@
-const draw_panel = document.getElementById("draw_panel");
-const context = draw_panel.getContext("2d");
+function dragstartHandler(ev) {
+  const accessory = ev.target.closest(".accessory");
+  if (!accessory) return;
 
-draw_panel.addEventListener("dragover", (ev) => {
-  ev.preventDefault();
-});
-draw_panel.addEventListener("drop", (ev) => {
-  ev.preventDefault();
-  const image = new Image();
-  image.src = ev.dataTransfer.getData("text/plain");
-  image.onload = () => {
-    const rect = draw_panel.getBoundingClientRect();
-    context.drawImage(image, ev.clientX - rect.left, ev.clientY - rect.top);
-  };
+  ev.dataTransfer.setData("text/plain", accessory.src);
+  ev.dataTransfer.setData("application/x-accessory-type", accessory.dataset.type || "clothes");
+}
+
+document.querySelectorAll(".accessory").forEach((image) => {
+  image.addEventListener("dragstart", dragstartHandler);
 });

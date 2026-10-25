@@ -12,8 +12,12 @@ body {
     
 }
 
-#title{
+.title{
     text-align: center;
+}
+
+.accessory {
+    cursor: grab;
 }
 
 #special{

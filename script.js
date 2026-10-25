@@ -9,12 +9,28 @@ function startMusic(){
 const canvas = document.getElementById("uwah");
 const ctx = canvas.getContext("2d");
 
-const img = new Image();
+window.placedAccessories = [];
+window.activeDrag = null;
 
-img.onload = function() {
-    canvas.width = img.naturalWidth;
-    canvas.height = img.naturalHeight;
-    ctx.drawImage(img, 0, 0);
+const baseImage = new Image();
+
+function renderScene() {
+    if (!baseImage.complete) return;
+
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    ctx.drawImage(baseImage, 0, 0, canvas.width, canvas.height);
+
+    for (const item of window.placedAccessories) {
+        if (item && item.image && item.image.complete) {
+            ctx.drawImage(item.image, item.x, item.y, item.width, item.height);
+        }
+    }
+}
+
+baseImage.onload = function() {
+    canvas.width = baseImage.naturalWidth;
+    canvas.height = baseImage.naturalHeight;
+    renderScene();
 };
 
-img.src = "files/use.png"
+baseImage.src = "files/use.png"
