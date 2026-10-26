@@ -4,6 +4,7 @@
      display: block;
      max-width: 100%;
      height: auto;
+     border: 5px solid rgb(50, 49, 49);
 }
 
 body {
@@ -23,4 +24,5 @@ body {
 #special{
   border: 5px solid rgb(50, 49, 49);
   padding: 3px;
+  align-items: right;
 }

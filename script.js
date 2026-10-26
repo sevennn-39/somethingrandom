@@ -12,12 +12,14 @@ const ctx = canvas.getContext("2d");
 window.placedAccessories = [];
 window.activeDrag = null;
 
+const backgroundImage = new Image();
 const baseImage = new Image();
 
 function renderScene() {
-    if (!baseImage.complete) return;
+    if (!backgroundImage.complete || !baseImage.complete) return;
 
     ctx.clearRect(0, 0, canvas.width, canvas.height);
+    ctx.drawImage(backgroundImage, 0, 0, canvas.width, canvas.height);
     ctx.drawImage(baseImage, 0, 0, canvas.width, canvas.height);
 
     for (const item of window.placedAccessories) {
@@ -27,10 +29,17 @@ function renderScene() {
     }
 }
 
-baseImage.onload = function() {
-    canvas.width = baseImage.naturalWidth;
-    canvas.height = baseImage.naturalHeight;
-    renderScene();
-};
+function setCanvasSize() {
+    const width = backgroundImage.naturalWidth || baseImage.naturalWidth;
+    const height = backgroundImage.naturalHeight || baseImage.naturalHeight;
 
+    canvas.width = width;
+    canvas.height = height;
+    renderScene();
+}
+
+backgroundImage.onload = setCanvasSize;
+baseImage.onload = setCanvasSize;
+
+backgroundImage.src = "files/bg.png";
 baseImage.src = "files/use.png"
