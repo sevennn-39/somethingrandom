@@ -3,5 +3,7 @@ A small character creator game where you try to help a guy get more confidence b
 
 Credits: 
 > Art by: me!
+
 > Code by: me!
+
 > BGM by: leberch on Pixabay (copyright free)
