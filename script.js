@@ -1,4 +1,4 @@
-const music = new Audio('files/')
+const music = new Audio('files/bgmmusic.mp3')
 
 music.loop = true,
 
