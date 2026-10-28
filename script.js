@@ -6,6 +6,8 @@ function startMusic(){
     music.play()
 }
 
+startMusic();
+
 const canvas = document.getElementById("uwah");
 const ctx = canvas.getContext("2d");
 
