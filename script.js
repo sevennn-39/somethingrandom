@@ -1,9 +1,12 @@
 const music = new Audio('files/bgmmusic.mp3')
 
-music.loop = true,
+music.loop = true;
 
 function startMusic(){
-    music.play()
+    music.play().catch(() => {
+        document.addEventListener('pointerdown', startMusic, { once: true });
+        document.addEventListener('keydown', startMusic, { once: true });
+    });
 }
 
 startMusic();
@@ -38,6 +41,40 @@ function setCanvasSize() {
     canvas.width = width;
     canvas.height = height;
     renderScene();
+}
+
+let confidence = 0;
+const maxconfidence = 100;
+const confidenceBar = document.getElementById("confidenceBar");
+
+const outfitOptions = {
+    shirt: ["orange.png", "yellow.png", "green.png", "blue.png", "purple.png"],
+    accessory: ["bracelets.png", "necklace.png"],
+    hat: ["tophat.png", "sidehat.png", "leafhat.png"]
+};
+
+const targetOutfit = Object.fromEntries(
+    Object.entries(outfitOptions).map(([category, options]) => [
+        category,
+        `files/${options[Math.floor(Math.random() * options.length)]}`
+    ])
+);
+
+for (const category of Object.keys(targetOutfit)) {
+    const targetImage = document.getElementById(`target-${category}`);
+    if (targetImage) targetImage.src = targetOutfit[category];
+}
+
+function updateConfidenceFromOutfit() {
+    const categories = ["shirt", "accessory", "hat"];
+    const matches = categories.filter((category) =>
+        window.placedAccessories.some((item) =>
+            item.isWorn && item.src.endsWith(targetOutfit[category])
+        )
+    ).length;
+
+    confidence = (matches / categories.length) * maxconfidence;
+    confidenceBar.style.height = `${confidence}%`;
 }
 
 backgroundImage.onload = setCanvasSize;

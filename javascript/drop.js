@@ -32,10 +32,14 @@ function snapAccessory(item) {
   const anchorX = anchor.x + item.width / 2;
   const anchorY = anchor.y + item.height / 2;
 
+  item.isWorn = false;
   if (Math.hypot(centerX - anchorX, centerY - anchorY) <= 160) {
     item.x = anchor.x;
     item.y = anchor.y;
+    item.isWorn = true;
   }
+
+  updateConfidenceFromOutfit();
 }
 
 function getPointerPosition(ev) {
