@@ -66,14 +66,20 @@ for (const category of Object.keys(targetOutfit)) {
 }
 
 function updateConfidenceFromOutfit() {
-    const categories = ["shirt", "accessory", "hat"];
-    const matches = categories.filter((category) =>
+    const categoryTypes = {
+        shirt: ["clothes"],
+        accessory: ["bracelets", "necklace"],
+        hat: ["hat"]
+    };
+    const matches = Object.entries(targetOutfit).filter(([category, targetSrc]) =>
         window.placedAccessories.some((item) =>
-            item.isWorn && item.src.endsWith(targetOutfit[category])
+            item.isWorn &&
+            categoryTypes[category].includes(item.type) &&
+            item.src.endsWith(targetSrc)
         )
     ).length;
 
-    confidence = (matches / categories.length) * maxconfidence;
+    confidence = (matches / Object.keys(targetOutfit).length) * maxconfidence;
     confidenceBar.style.height = `${confidence}%`;
 }
 
