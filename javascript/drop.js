@@ -45,8 +45,8 @@ function snapAccessory(item) {
 function getPointerPosition(ev) {
   const rect = uwah.getBoundingClientRect();
   return {
-    x: ev.clientX - rect.left,
-    y: ev.clientY - rect.top
+    x: (ev.clientX - rect.left) * (uwah.width / rect.width),
+    y: (ev.clientY - rect.top) * (uwah.height / rect.height)
   };
 }
 

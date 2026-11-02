@@ -47,39 +47,14 @@ let confidence = 0;
 const maxconfidence = 100;
 const confidenceBar = document.getElementById("confidenceBar");
 
-const outfitOptions = {
-    shirt: ["orange.png", "yellow.png", "green.png", "blue.png", "purple.png"],
-    accessory: ["bracelets.png", "necklace.png"],
-    hat: ["tophat.png", "sidehat.png", "leafhat.png"]
-};
-
-const targetOutfit = Object.fromEntries(
-    Object.entries(outfitOptions).map(([category, options]) => [
-        category,
-        `files/${options[Math.floor(Math.random() * options.length)]}`
-    ])
-);
-
-for (const category of Object.keys(targetOutfit)) {
-    const targetImage = document.getElementById(`target-${category}`);
-    if (targetImage) targetImage.src = targetOutfit[category];
-}
-
 function updateConfidenceFromOutfit() {
-    const categoryTypes = {
-        shirt: ["clothes"],
-        accessory: ["bracelets", "necklace"],
-        hat: ["hat"]
-    };
-    const matches = Object.entries(targetOutfit).filter(([category, targetSrc]) =>
-        window.placedAccessories.some((item) =>
-            item.isWorn &&
-            categoryTypes[category].includes(item.type) &&
-            item.src.endsWith(targetSrc)
-        )
-    ).length;
+    const wornCategories = new Set(
+        window.placedAccessories
+            .filter((item) => item.isWorn)
+            .map((item) => item.type === "clothes" ? "shirt" : item.type === "hat" ? "hat" : "accessory")
+    );
 
-    confidence = (matches / Object.keys(targetOutfit).length) * maxconfidence;
+    confidence = (wornCategories.size / 3) * maxconfidence;
     confidenceBar.style.height = `${confidence}%`;
 }
 
