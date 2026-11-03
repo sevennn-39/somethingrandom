@@ -7,3 +7,8 @@ Credits:
 > Code by: me!
 
 > BGM by: leberch on Pixabay (copyright free)
+
+Runs mainly on Javascript and HTML.
+
+To play: click the link!
+> https://sevennn-39.github.io/somethingrandom/main.html 
