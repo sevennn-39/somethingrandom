@@ -48,13 +48,12 @@ const maxconfidence = 100;
 const confidenceBar = document.getElementById("confidenceBar");
 
 function updateConfidenceFromOutfit() {
-    const wornCategories = new Set(
+    const placedCategories = new Set(
         window.placedAccessories
-            .filter((item) => item.isWorn)
             .map((item) => item.type === "clothes" ? "shirt" : item.type === "hat" ? "hat" : "accessory")
     );
 
-    confidence = (wornCategories.size / 3) * maxconfidence;
+    confidence = (placedCategories.size / 3) * maxconfidence;
     confidenceBar.style.height = `${confidence}%`;
 }
 
