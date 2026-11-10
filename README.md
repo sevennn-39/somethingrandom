@@ -8,7 +8,7 @@ Credits:
 
 > BGM by: leberch on Pixabay (copyright free)
 
-Runs mainly on Javascript and HTML.
+Runs mainly on Javascript and HTML, specifically the drag framework to snap costumes and make them adjustable within the game. 
 
 To play: click the link!
 > https://sevennn-39.github.io/somethingrandom/main.html 
