@@ -8,7 +8,7 @@ Credits:
 
 > BGM by: leberch on Pixabay (copyright free)
 
-Runs mainly on Javascript and HTML, specifically the drag framework to snap costumes and make them adjustable within the game. It was also originally made partially with the framework of a previous project that featured drag-and-drop elements, but the rest is original.
+Runs mainly on Javascript and HTML, specifically the drag framework to snap costumes and make them adjustable within the game. It was also originally made partially with the framework of a previous project that featured drag-and-drop elements, but the rest is original. As stated in the description, I originally made this for a game jam, but I realized I wasn't able to submit it in time and 
 
 To play: click the link!
 > https://sevennn-39.github.io/somethingrandom/main.html 
